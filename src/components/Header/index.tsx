@@ -1,5 +1,6 @@
 import header from '../../assets/header.png'
+import { HeaderImage } from './styles'
 
 export function Header() {
-  return <img src={header} alt="" style={{ width: '100%' }} />
+  return <HeaderImage src={header} />
 }
