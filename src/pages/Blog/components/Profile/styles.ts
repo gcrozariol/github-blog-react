@@ -6,11 +6,13 @@ export const ProfileContainer = styled.div`
   flex-direction: row;
   background-color: ${(props) => props.theme['base-profile']};
   box-shadow: 0px 2px 28px 0px rgba(0, 0, 0, 0.2);
+  max-width: 1220px;
 `
 
 export const Avatar = styled.img`
-  padding: 2rem;
-  padding-left: 2.5rem;
+  margin: 2rem;
+  margin-left: 2.5rem;
+  border-radius: 8px;
 `
 
 export const About = styled.div`
