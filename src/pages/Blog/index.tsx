@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { Posts } from './components/Posts'
+import { PostProps, Posts } from './components/Posts'
 import { Profile, UserProps } from './components/Profile'
 import { SearchBar } from './components/SearchBar'
 
@@ -9,34 +8,12 @@ import {
   PostsText,
   PostsAmountText,
 } from './styles'
+interface BlogProps {
+  user: UserProps | null
+  posts: PostProps[]
+}
 
-import { api } from '../../lib/axios'
-
-export function Blog() {
-  const [user, setUser] = useState<UserProps | null>(null)
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-    async function getUser() {
-      const response = await api.get('users/gcrozariol')
-
-      if (response.status !== 200) return
-      setUser(response.data)
-    }
-
-    async function getPosts() {
-      const response = await api.get(
-        'repos/gcrozariol/github-blog-react/issues',
-      )
-
-      if (response.status !== 200) return
-      setPosts(response.data)
-    }
-
-    getUser()
-    getPosts()
-  }, [])
-
+export function Blog({ user, posts }: BlogProps) {
   return user ? (
     <BlogContainer>
       <Profile data={user} />

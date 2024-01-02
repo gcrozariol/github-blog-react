@@ -64,7 +64,7 @@ export function Profile(user: ProfileProps) {
           </Link>
         </LinksContainer>
       </About>
-      <GitHubLinkContainer href="https://github.com/gcrozariol" target="_blank">
+      <GitHubLinkContainer href={`https://github.com/${login}`} target="_blank">
         <GitHubLinkText>GITHUB</GitHubLinkText>
         <GitHubLinkImg src={linkImg} alt="" />
       </GitHubLinkContainer>
