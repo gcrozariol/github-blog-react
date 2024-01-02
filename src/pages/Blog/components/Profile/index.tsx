@@ -15,8 +15,10 @@ import githubImg from '../../../../assets/github.png'
 import companyImg from '../../../../assets/company.png'
 import peopleImg from '../../../../assets/people.png'
 import linkImg from '../../../../assets/link.png'
+import { useContext } from 'react'
+import { GitHubContext } from '../../../../context/GitHubContext'
 
-export interface UserProps {
+export interface User {
   name: string
   login: string
   avatar_url: string
@@ -25,19 +27,12 @@ export interface UserProps {
   bio: string
 }
 
-interface ProfileProps {
-  data: UserProps
-}
+export function Profile() {
+  const { user } = useContext(GitHubContext)
 
-export function Profile(user: ProfileProps) {
-  const {
-    name,
-    login,
-    avatar_url: avatarUrl,
-    followers,
-    company,
-    bio,
-  } = user.data
+  if (!user) return
+
+  const { name, login, avatar_url: avatarUrl, followers, company, bio } = user
 
   return (
     <ProfileContainer>
@@ -45,6 +40,7 @@ export function Profile(user: ProfileProps) {
       <About>
         <Name>{name}</Name>
         <Description>{bio}</Description>
+
         <LinksContainer>
           <Link>
             <img src={githubImg} alt="" />
@@ -64,6 +60,7 @@ export function Profile(user: ProfileProps) {
           </Link>
         </LinksContainer>
       </About>
+
       <GitHubLinkContainer href={`https://github.com/${login}`} target="_blank">
         <GitHubLinkText>GITHUB</GitHubLinkText>
         <GitHubLinkImg src={linkImg} alt="" />

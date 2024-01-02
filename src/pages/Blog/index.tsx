@@ -1,5 +1,7 @@
-import { PostProps, Posts } from './components/Posts'
-import { Profile, UserProps } from './components/Profile'
+import { useContext } from 'react'
+import { GitHubContext } from '../../context/GitHubContext'
+import { Posts } from './components/Posts'
+import { Profile } from './components/Profile'
 import { SearchBar } from './components/SearchBar'
 
 import {
@@ -8,23 +10,20 @@ import {
   PostsText,
   PostsAmountText,
 } from './styles'
-interface BlogProps {
-  user: UserProps | null
-  posts: PostProps[]
-}
 
-export function Blog({ user, posts }: BlogProps) {
-  return user ? (
+export function Blog() {
+  const { posts } = useContext(GitHubContext)
+
+  return (
     <BlogContainer>
-      <Profile data={user} />
-
+      <Profile />
       <PostsInfoContainer>
         <PostsText>Posts</PostsText>
         <PostsAmountText>{posts.length} posts</PostsAmountText>
       </PostsInfoContainer>
 
       <SearchBar />
-      {posts.length ? <Posts posts={posts} /> : null}
+      <Posts />
     </BlogContainer>
-  ) : null
+  )
 }

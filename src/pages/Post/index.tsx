@@ -1,11 +1,9 @@
+import { useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { PostProps } from '../Blog/components/Posts'
+import { GitHubContext } from '../../context/GitHubContext'
 
-interface PostDataProps {
-  posts: PostProps[]
-}
-
-export function Post({ posts }: PostDataProps) {
+export function Post() {
+  const { posts } = useContext(GitHubContext)
   const { postId } = useParams()
 
   const post = posts.find((post) => post.id.toString() === postId)

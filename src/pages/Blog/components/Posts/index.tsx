@@ -8,8 +8,10 @@ import {
   PostDate,
   PostContent,
 } from './styles'
+import { useContext } from 'react'
+import { GitHubContext } from '../../../../context/GitHubContext'
 
-export interface PostProps {
+export interface Post {
   id: number
   title: string
   body: string
@@ -17,7 +19,7 @@ export interface PostProps {
 }
 
 interface PostCardProps {
-  data: PostProps
+  data: Post
 }
 
 function PostCard({ data }: PostCardProps) {
@@ -38,10 +40,14 @@ function PostCard({ data }: PostCardProps) {
   )
 }
 
-export function Posts(data: { posts: PostProps[] }) {
+export function Posts() {
+  const { posts } = useContext(GitHubContext)
+
+  if (posts.length === 0) return
+
   return (
     <PostsContainer>
-      {data.posts.map((post) => {
+      {posts.map((post) => {
         return (
           <Link
             to={`/posts/${post.id}`}
