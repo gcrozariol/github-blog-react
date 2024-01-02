@@ -15,6 +15,7 @@ export const Avatar = styled.img`
   border-radius: 8px;
 
   width: 148px;
+  height: 148px;
 `
 
 export const About = styled.div`
@@ -33,9 +34,16 @@ export const Name = styled.span`
 `
 
 export const Description = styled.span`
-  padding-bottom: 1.5rem;
-  padding-right: 2rem;
-  max-width: 630px;
+  margin-bottom: 1.5rem;
+  max-width: 550px;
+  height: 48px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const LinksContainer = styled.div`

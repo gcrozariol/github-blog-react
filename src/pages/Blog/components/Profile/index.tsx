@@ -22,6 +22,7 @@ export interface UserProps {
   avatar_url: string
   followers: number
   company: string
+  bio: string
 }
 
 interface ProfileProps {
@@ -29,18 +30,21 @@ interface ProfileProps {
 }
 
 export function Profile(user: ProfileProps) {
-  const { name, login, avatar_url: avatarUrl, followers, company } = user.data
+  const {
+    name,
+    login,
+    avatar_url: avatarUrl,
+    followers,
+    company,
+    bio,
+  } = user.data
 
   return (
     <ProfileContainer>
       <Avatar src={avatarUrl} alt="" />
       <About>
         <Name>{name}</Name>
-        <Description>
-          Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-          viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
-          pulvinar vel mass.
-        </Description>
+        <Description>{bio}</Description>
         <LinksContainer>
           <Link>
             <img src={githubImg} alt="" />
