@@ -46,7 +46,7 @@ export const PostDate = styled.span`
   font-size: 14px;
   text-align: end;
 
-  min-width: 80px;
+  min-width: 90px;
   margin-top: 5px;
   color: ${(props) => props.theme['base-span']};
 `

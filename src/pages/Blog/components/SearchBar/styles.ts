@@ -2,23 +2,6 @@ import styled from 'styled-components'
 
 export const SearchBarContainer = styled.div``
 
-export const PostsInfoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 5rem;
-`
-
-export const PostsText = styled.span`
-  font-size: 18px;
-  font-weight: bold;
-  color: ${(props) => props.theme['base-subtitle']};
-`
-
-export const PostsAmountText = styled.span`
-  font-size: 14px;
-`
-
 export const SearchInput = styled.input`
   width: 100%;
 

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { formatDistance, subDays } from 'date-fns'
 import {
   PostsContainer,
   Post,
@@ -10,8 +12,8 @@ import {
 interface PostProps {
   id: string
   title: string
-  content: string
-  createdAt: string
+  body: string
+  created_at: string
 }
 
 interface PostCardProps {
@@ -19,41 +21,36 @@ interface PostCardProps {
 }
 
 function PostCard({ data }: PostCardProps) {
-  const { title, content, createdAt } = data
+  const { title, body, created_at: createdAt } = data
+
+  const date = formatDistance(subDays(new Date(createdAt), 0), new Date(), {
+    addSuffix: true,
+  })
 
   return (
     <Post>
       <PostHeader>
         <PostTitle>{title}</PostTitle>
-        <PostDate>{createdAt}</PostDate>
+        <PostDate>{date}</PostDate>
       </PostHeader>
-      <PostContent>{content}</PostContent>
+      <PostContent>{body}</PostContent>
     </Post>
   )
 }
 
-export function Posts() {
-  const posts = [
-    {
-      id: '1',
-      title: 'JavaScript data types and data structures',
-      content:
-        'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn. Dynamic typing JavaScript is a loosely typed and dynamic language. Variables in JavaScript are not directly associated with any particular value type, and any variable can be assigned (and re-assigned) values of all types',
-      createdAt: '2 days ago',
-    },
-    {
-      id: '2',
-      title: 'JavaScript data types and data structures',
-      content:
-        'Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn. Dynamic typing JavaScript is a loosely typed and dynamic language. Variables in JavaScript are not directly associated with any particular value type, and any variable can be assigned (and re-assigned) values of all types',
-      createdAt: '2 days ago',
-    },
-  ]
-
+export function Posts(data: { posts: PostProps[] }) {
   return (
     <PostsContainer>
-      {posts.map((post) => {
-        return <PostCard key={post.id} data={post} />
+      {data.posts.map((post) => {
+        return (
+          <Link
+            to={`/posts/${post.id}`}
+            key={post.id}
+            style={{ textDecoration: 'none' }}
+          >
+            <PostCard data={post} />
+          </Link>
+        )
       })}
     </PostsContainer>
   )

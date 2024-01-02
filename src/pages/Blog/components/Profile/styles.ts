@@ -13,6 +13,8 @@ export const Avatar = styled.img`
   margin: 2rem;
   margin-left: 2.5rem;
   border-radius: 8px;
+
+  width: 148px;
 `
 
 export const About = styled.div`
@@ -48,7 +50,7 @@ export const Link = styled.div`
   gap: 0.5rem;
 `
 
-export const GitHubLinkContainer = styled.div`
+export const GitHubLinkContainer = styled.a`
   display: flex;
   position: absolute;
 
@@ -58,9 +60,13 @@ export const GitHubLinkContainer = styled.div`
   align-items: center;
 
   gap: 0.5rem;
+  text-decoration: none;
 
-  :hover {
+  transition: 100ms;
+
+  &:hover {
     cursor: pointer;
+    opacity: 75%;
   }
 `
 
