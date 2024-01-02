@@ -13,6 +13,7 @@ export function SearchBar() {
         <PostsText>Posts</PostsText>
         <PostsAmountText>7 posts</PostsAmountText>
       </PostsInfoContainer>
+
       <SearchInput placeholder="Search content" />
     </SearchBarContainer>
   )
