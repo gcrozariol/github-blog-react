@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { formatDistance, subDays } from 'date-fns'
 import {
   PostsContainer,
   Post,
@@ -6,27 +8,56 @@ import {
   PostDate,
   PostContent,
 } from './styles'
+import { useContext } from 'react'
+import { GitHubContext } from '../../../../context/GitHubContext'
+
+export interface Post {
+  id: number
+  title: string
+  body: string
+  created_at: string
+}
+
+interface PostCardProps {
+  data: Post
+}
+
+function PostCard({ data }: PostCardProps) {
+  const { title, body, created_at: createdAt } = data
+
+  const date = formatDistance(subDays(new Date(createdAt), 0), new Date(), {
+    addSuffix: true,
+  })
+
+  return (
+    <Post>
+      <PostHeader>
+        <PostTitle>{title}</PostTitle>
+        <PostDate>{date}</PostDate>
+      </PostHeader>
+      <PostContent>{body}</PostContent>
+    </Post>
+  )
+}
 
 export function Posts() {
+  const { posts } = useContext(GitHubContext)
+
+  if (posts.length === 0) return
+
   return (
     <PostsContainer>
-      <Post>
-        <PostHeader>
-          <PostTitle>JavaScript data types and data structures</PostTitle>
-          <PostDate>2 days ago</PostDate>
-        </PostHeader>
-        <PostContent>
-          Programming languages all have built-in data structures, but these
-          often differ from one language to another. This article attempts to
-          list the built-in data structures available in JavaScript and what
-          properties they have. These can be used to build other data
-          structures. Wherever possible, comparisons with other languages are
-          drawn. Dynamic typing JavaScript is a loosely typed and dynamic
-          language. Variables in JavaScript are not directly associated with any
-          particular value type, and any variable can be assigned (and
-          re-assigned) values of all types.
-        </PostContent>
-      </Post>
+      {posts.map((post) => {
+        return (
+          <Link
+            to={`/posts/${post.id}`}
+            key={post.id}
+            style={{ textDecoration: 'none' }}
+          >
+            <PostCard data={post} />
+          </Link>
+        )
+      })}
     </PostsContainer>
   )
 }

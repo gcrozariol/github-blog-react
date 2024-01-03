@@ -14,36 +14,54 @@ import {
 import githubImg from '../../../../assets/github.png'
 import companyImg from '../../../../assets/company.png'
 import peopleImg from '../../../../assets/people.png'
-import avatarImg from '../../../../assets/avatar.png'
 import linkImg from '../../../../assets/link.png'
+import { useContext } from 'react'
+import { GitHubContext } from '../../../../context/GitHubContext'
+
+export interface User {
+  name: string
+  login: string
+  avatar_url: string
+  followers: number
+  company: string
+  bio: string
+}
 
 export function Profile() {
+  const { user } = useContext(GitHubContext)
+
+  if (!user) return
+
+  const { name, login, avatar_url: avatarUrl, followers, company, bio } = user
+
   return (
     <ProfileContainer>
-      <Avatar src={avatarImg} alt="" />
+      <Avatar src={avatarUrl} alt="" />
       <About>
-        <Name>Guilherme Crozariol</Name>
-        <Description>
-          Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-          viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
-          pulvinar vel mass.
-        </Description>
+        <Name>{name}</Name>
+        <Description>{bio}</Description>
+
         <LinksContainer>
           <Link>
             <img src={githubImg} alt="" />
-            <span>gcrozariol</span>
+            <span>{login}</span>
           </Link>
-          <Link>
-            <img src={companyImg} alt="" />
-            <span>Rocketseat</span>
-          </Link>
+
+          {company ? (
+            <Link>
+              <img src={companyImg} alt="" />
+              <span>Rocketseat</span>
+            </Link>
+          ) : null}
+
           <Link>
             <img src={peopleImg} alt="" />
-            <span>32 followers</span>
+            <span>{followers} followers</span>
           </Link>
         </LinksContainer>
       </About>
-      <GitHubLinkContainer>
+
+      <GitHubLinkContainer href={`https://github.com/${login}`} target="_blank">
         <GitHubLinkText>GITHUB</GitHubLinkText>
         <GitHubLinkImg src={linkImg} alt="" />
       </GitHubLinkContainer>

@@ -12,6 +12,19 @@ export const Post = styled.div`
   background-color: ${(props) => props.theme['base-post']};
   border-radius: 10px;
   padding: 2rem;
+
+  border: 2px solid ${(props) => props.theme['base-post']};
+
+  transition: 100ms;
+
+  &:hover {
+    cursor: pointer;
+    border: 2px solid ${(props) => props.theme['base-label']};
+  }
+
+  &:active {
+    opacity: 80%;
+  }
 `
 
 export const PostHeader = styled.div`
@@ -33,13 +46,12 @@ export const PostDate = styled.span`
   font-size: 14px;
   text-align: end;
 
-  min-width: 80px;
+  min-width: 90px;
   margin-top: 5px;
   color: ${(props) => props.theme['base-span']};
 `
 
 export const PostContent = styled.div`
-  min-width: 352px;
   height: 90px;
 
   margin-top: 1.25rem;
