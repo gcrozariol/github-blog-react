@@ -1,6 +1,10 @@
 import { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { GitHubContext } from '../../context/GitHubContext'
+import { PostContainer } from './styles'
+import { Header } from './components/Header'
+
+import Markdown from 'markdown-to-jsx'
 
 export function Post() {
   const { posts } = useContext(GitHubContext)
@@ -11,17 +15,11 @@ export function Post() {
   if (!post) return
 
   return (
-    <div
-      style={{
-        width: '100%',
-        maxWidth: '1120px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-      }}
-    >
-      <span>{post.title}</span>
-      <span>{post.body}</span>
-    </div>
+    <PostContainer>
+      <Header />
+      <div style={{ padding: '2.5rem 2rem' }}>
+        <Markdown>{post.body}</Markdown>
+      </div>
+    </PostContainer>
   )
 }

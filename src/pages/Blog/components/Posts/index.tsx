@@ -15,6 +15,8 @@ export interface Post {
   id: number
   title: string
   body: string
+  comments: number
+  html_url: string
   created_at: string
 }
 
